@@ -2,6 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import { Head, useForm, usePage, router } from "@inertiajs/vue3";
@@ -11,8 +12,7 @@ interface Company {
     name: string;
     email: string;
     logo: any | null;
-    website: string;
-    // Add other properties as needed
+    website: string
 }
 
 const company = usePage().props.company as Company;
@@ -164,16 +164,29 @@ const goBack = () => {
                                                 {{ form.errors.logo }}
                                             </div>
                                         </div>
-                                        <PrimaryButton
-                                            type="submit"
-                                            :class="{
-                                                'opacity-25 mt-5 pt-5 ':
-                                                    form.processing,
-                                            }"
-                                            :disabled="form.processing"
-                                        >
-                                            Submit
-                                        </PrimaryButton>
+                                        <div class="inline-flex gap-4">
+                                            <PrimaryButton
+                                                type="submit"
+                                                :class="{
+                                                    'opacity-25 mt-5 pt-5 ':
+                                                        form.processing,
+                                                }"
+                                                :disabled="form.processing"
+                                            >
+                                                Submit
+                                            </PrimaryButton>
+                                            <SecondaryButton
+                                                type="button"
+                                                :class="{
+                                                    'opacity-25 mt-5 pt-5 bg-gray-500':
+                                                        form.processing,
+                                                }"
+                                                :disabled="form.processing"
+                                                @click="goBack"
+                                            >
+                                                Cancel
+                                            </SecondaryButton>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
