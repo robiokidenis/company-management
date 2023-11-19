@@ -25,7 +25,7 @@ class CompanyStoreRequest extends FormRequest
             'name' => 'required|string|',
             'email' => 'required|email|unique:companies,email',
             'website' => 'nullable|url',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
+            'logo' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
         ];
     }
     public function messages()

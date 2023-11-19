@@ -26,6 +26,7 @@ const handleFileChange = (event: any) => {
 const goBack = () => {
     router.visit(route("companies.index"));
 };
+
 </script>
 
 <template>

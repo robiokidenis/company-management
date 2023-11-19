@@ -233,7 +233,6 @@ const fetchDataForPage = async (page: number, pageSize: number) => {
 };
 
 const addCompany = () => {
-
     router.visit(route("companies.create"));
 
     form.clearErrors();
@@ -284,7 +283,6 @@ const redirectToWebsite = (website: string) => {
     window.open(website, "_blank");
 };
 const editCompany = (company: Company) => {
-
     router.visit(route("companies.edit", { id: company.id }));
 
     modalTitle.value = "Edit Company";
