@@ -231,6 +231,7 @@ const fetchDataForPage = async (page: number, pageSize: number) => {
 const addEmployee = () => {
     form.clearErrors();
     form.reset();
+   
     openModal.value = true;
     modalTitle.value = "Add Employee";
 };
@@ -245,6 +246,7 @@ const handleSubmit = () => {
         onSuccess: () => {
             openModal.value = false;
             router.reload();
+            form.reset();
         },
     });
 };
