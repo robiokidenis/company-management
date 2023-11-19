@@ -56,11 +56,11 @@
                             <span>
                                 <a
                                     @click.prevent="editCompany(record)"
-                                    class="mr-2 text-blue-600 hover:text-blue-900 hover:underline"
+                                    class="mr-2 text-blue-600 hover:text-blue-900  hover:bg-blue-200 px-4 py-1 border border-blue-600 rounded-xl"
                                     >Edit</a
                                 >
                                 <a
-                                    class="text-red-600 hover:text-red-900 hover:underline"
+                                    class="text-red-600 hover:text-red-900 px-4 py-1 hover:bg-red-200 border border-red-600 rounded-xl"
                                     @click.prevent="deleteCompany(record.id)"
                                     >Delete</a
                                 >

@@ -11,35 +11,41 @@
             </template>
 
             <div class="xl:p-12 pt-10 xl:mx-10 overflow-scroll">
-              <div class="pl-5">
-                <a-button
-                    class="editable-add-btn dark:text-white pb-5font-bold border"
-                    @click="addEmployee"
-                >
-                    Add Employee
-                </a-button>
-              </div>
+                <div class="pl-5">
+                    <a-button
+                        class="editable-add-btn dark:text-white pb-5font-bold border"
+                        @click="addEmployee"
+                    >
+                        Add Employee
+                    </a-button>
+                </div>
                 <a-table
                     class="dark:bg-slate-300 dark:text-white p-5 rounded-lg overflow-hidden"
                     :dataSource="employees.data"
                     :columns="columns"
                     :pagination="paginationConfig"
                     :filterSearch="true"
-
                 >
                     <template #bodyCell="{ column, record, index }">
                         <template v-if="column.key === 'action'">
                             <span>
                                 <a
                                     @click.prevent="editEmployee(record)"
-                                    class="mr-2 text-blue-600 hover:text-blue-900 hover:underline"
+                                    class="mr-2 text-blue-600 hover:text-blue-900 hover:bg-blue-200 px-4 py-1 border border-blue-600 rounded-xl"
                                     >Edit</a
                                 >
                                 <a
+                                    class="text-red-600 hover:text-red-900 px-4 py-1 hover:bg-red-200 border border-red-600 rounded-xl"
                                     @click.prevent="deleteEmployee(record.id)"
-                                    class="text-red-600 hover:text-red-900 hover:underline"
                                     >Delete</a
                                 >
+                            </span>
+                        </template>
+                        <template v-if="column.key === 'company'">
+                            <span
+                                class=" px-2 py-1 text-xs text-green-700 rounded-xl"
+                            >
+                                {{ record.company }}
                             </span>
                         </template>
                         <template v-else-if="column.key === 'index'">
@@ -231,7 +237,7 @@ const fetchDataForPage = async (page: number, pageSize: number) => {
 const addEmployee = () => {
     form.clearErrors();
     form.reset();
-   
+
     openModal.value = true;
     modalTitle.value = "Add Employee";
 };
