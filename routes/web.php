@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\{CompanyController, EmployeeController, ProfileController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,7 +19,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'canRegister' => false, // Route::has('register'),
+        'canRegister' => false, // Route::has('register'), //disable register feature
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -36,9 +36,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'roleAdmin'])->group(function () {
-    Route::get('/admin', function () {
-        return 200;
-    })->name('admin');
+    Route::resource('companies', CompanyController::class);
+    Route::resource('employees', EmployeeController::class);
 });
 
 require __DIR__ . '/auth.php';
