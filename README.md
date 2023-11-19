@@ -27,9 +27,6 @@ This project is a Company Management System that facilitates the management of c
 - **Vite**
 - **Ant Design (Antd)**
 
-## Usage
-
-Describe how to use or test the application.
 
 ## Contributing
 
