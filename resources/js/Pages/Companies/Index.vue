@@ -18,6 +18,8 @@
                     >
                         Add Company
                     </a-button>
+
+                 
                 </div>
                 <a-table
                     class="dark:bg-slate-300 dark:text-white p-5 rounded-lg overflow-hidden"
@@ -192,7 +194,7 @@ import InputError from "@/Components/InputError.vue";
 const openModal = ref<boolean>(false);
 const modalTitle = ref<string>("");
 
-const { companies, meta } = defineProps(["companies", "meta"]);
+const { companies, meta ,errors} = defineProps(["companies", "meta" ,'errors']);
 const [modal, contextHolder] = Modal.useModal();
 interface Company {
     id: any | null;
@@ -310,6 +312,9 @@ const deleteCompany = (id: number) => {
                     preserveScroll: true,
                     onSuccess: () => {
                         router.reload();
+                    },
+                    onError: () => {
+                        alert("Something went wrong");
                     },
                 }
             );

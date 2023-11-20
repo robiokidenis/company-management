@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('first_name')->required();
             $table->string('last_name')->required();
-            $table->foreignId('company_id')->constrained(); 
+            $table->foreignId('company_id')->constrained()->onDelete('cascade'); 
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();
