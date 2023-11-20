@@ -43,9 +43,12 @@
                         </template>
                         <template v-if="column.key === 'company'">
                             <span
-                                class=" px-2 py-1 text-xs text-green-700 rounded-xl"
+                                class="px-2 py-1 text-xs text-green-700 rounded-xl cursor-pointer hover:bg-green-700 hover:text-white"
+                                @click.prevent="
+                                    handleShowCompany(record.company)
+                                "
                             >
-                                {{ record.company }}
+                                {{ record.company.name }}
                             </span>
                         </template>
                         <template v-else-if="column.key === 'index'">
@@ -168,7 +171,54 @@
                     </form>
                 </div>
             </a-modal>
-            <div></div>
+            <div>
+                <a-modal
+                    v-model:open="showCompany"
+                    title="Company Detail"
+                    @ok="handleSubmit"
+                >
+                    <template #footer>
+                        <a-button
+                            class="bg-blue-800 text-white font-bold"
+                            key="submit"
+                            type="primary"
+                            :loading="false"
+                            @click="showCompany = false"
+                            >OK</a-button
+                        >
+                    </template>
+                    <div class="my-5">
+                        <div>
+                            <InputLabel for="name" value="Name" />
+
+                            <div>
+                                {{ company?.name }}
+                            </div>
+                        </div>
+
+                        <div class="my-6">
+                            <label
+                                for="content"
+                                class="block mb-2 text-sm font-medium text-gray-900"
+                                >Email</label
+                            >
+                            <div>
+                                {{ company?.email }}
+                            </div>
+                        </div>
+                        <div class="my-6">
+                            <label
+                                for="content"
+                                class="block mb-2 text-sm font-medium text-gray-900"
+                                >Website</label
+                            >
+                            <div>
+                                {{ company?.website }}
+                            </div>
+                        </div>
+                    </div>
+                </a-modal>
+            </div>
         </AuthenticatedLayout>
     </div>
 </template>
@@ -204,6 +254,17 @@ interface Employee {
     phone: string | null;
 }
 
+interface Company {
+    id: number | null;
+    name: string;
+    email: string | null;
+    website: string | null;
+    logo?: string | null;
+}
+const company = ref<Company>();
+
+const showCompany = ref<boolean>(false);
+
 const columns = ref([
     { title: "#", key: "index" },
     { title: "ID", dataIndex: "id", key: "id" },
@@ -237,7 +298,6 @@ const fetchDataForPage = async (page: number, pageSize: number) => {
 const addEmployee = () => {
     form.clearErrors();
     form.reset();
-
     openModal.value = true;
     modalTitle.value = "Add Employee";
 };
@@ -290,6 +350,16 @@ const deleteEmployee = (id: number) => {
         },
         onCancel() {},
     });
+};
+
+const handleShowCompany = (com: Company) => {
+    company.value = {
+        id: com.id,
+        name: com.name,
+        email: com.email,
+        website: com.website,
+    };
+    showCompany.value = true;
 };
 
 const form = useForm<Employee>({
