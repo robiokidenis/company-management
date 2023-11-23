@@ -155,7 +155,7 @@
 
                             <TextInput
                                 type="text"
-                                v-model="form.phone"
+                                 v-model="form.phone"
                                 name="phone"
                                 id="phone"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -367,7 +367,7 @@ const form = useForm<Employee>({
     first_name: "",
     last_name: "",
     company_id: null,
-    email: null,
-    phone: null,
+    email: "",
+    phone: "",
 });
 </script>
